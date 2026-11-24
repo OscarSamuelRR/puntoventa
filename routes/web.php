@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,6 @@ Route::post('/get_data_producto', [App\Http\Controllers\ProductoController::clas
 Route::resource('productos', 'App\Http\Controllers\ProductoController'::class);
 
 Route::resource('ventas', 'App\Http\Controllers\VentaController'::class);
+
+Route::get('ventas/{id}/reimprimir', [VentaController::class, 'reimprimir'])->name('ventas.reimprimir');
 

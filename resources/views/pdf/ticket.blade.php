@@ -53,35 +53,35 @@
         }
 
         @media print {
-    .oculto-impresion,
-    .oculto-impresion * {
-        display: none !important;
+            .oculto-impresion,
+            .oculto-impresion * {
+                display: none !important;
+            }
+        }
+
+    .button {
+      background-color: #3ceb42 !important; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+      font-size: 16px;
     }
-}
-
-.button {
-  background-color: #3ceb42 !important; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-        
     </style>
 </head>
 
 <body>
     <div class="ticket">
         <div class="centrado">
-            <img style="width: 90% !important;" src="images/logo.png" alt="Logotipo">
+            <img style="width: 90% !important;" src="{{ asset('images/logo.png') }}" alt="Logotipo">
         </div>
+        @if (!empty($reimpresion))
+            <p style="text-align:center; font-weight:bold;">*** REIMPRESIÓN ***</p>
+            <p style="text-align:center;">{{ now()->format('d/m/Y H:i') }}</p>
+        @endif
         @foreach ($info_venta as $venta)
-            
-        
         <p class="centrado">Ticket de Compra
             <br><b>Folio:</b> LM-{{ $venta->id }}
             <br>{{ $venta->fecha }}
@@ -116,8 +116,8 @@
         </div>
         
         <p class="centrado">¡GRACIAS POR SU COMPRA!
-            <img style="width: 70% !important;" src="images/paginaspa.png" alt="Logotipo">
-            <br>El presente documento no es un comprobante fiscal. Si requiere factura favor de mandar su folio de venta al correo: callcenter@lasmananitas.com.mx junto con su constancia de identificación fiscal, forma de pago y el uso del CFDI.
+            <img style="width: 70% !important;" src="{{ asset('images/paginaspa.png') }}" alt="Logotipo">
+            <br>El presente documento no es un comprobante fiscal. Si requiere factura favor de mandar su folio de venta al correo: callcenter@lasmananitas.com.mx junto con su constancia de identificación fiscal, forma de pago y el uso del CFDI. Tambien se requiere mandar foto de ticket de compra para que sea legible
             <br><br><b>https://lasmananitas.com.mx</b>
         </p>
         <br>

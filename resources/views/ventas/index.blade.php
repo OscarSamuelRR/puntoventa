@@ -73,7 +73,10 @@
                                         <td>{{ $venta->fecha }}</td>
                                         <td>{{ $venta->metodo_pago }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" title="Ver Detalles" href="{{ route('ventas.show',$venta->id) }}">Detalles</a>
+                                            <a class="btn btn-sm btn-primary" title="Ver Detalles" href="{{ route('ventas.show', $venta->id) }}">Detalles</a>
+                                            <a class="btn btn-sm btn-secondary" title="Reimprimir ticket" href="{{ route('ventas.reimprimir', $venta->id) }}" target="_blank">
+                                                <i class="fa fa-print"></i> Reimprimir
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

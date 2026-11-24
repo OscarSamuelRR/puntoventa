@@ -78,24 +78,51 @@ class VentaController extends Controller
             ]);
         }
 
-        $query_infoventa = "SELECT * FROM ventas WHERE ventas.id = $id_venta";
+        // $query_infoventa = "SELECT * FROM ventas WHERE ventas.id = $id_venta";
 
-        $query_detalle = "SELECT detalleventa.*, productos.nombre AS producto, productos.precio AS precio, detalleventa.cantidad * productos.precio AS subtotal
-        FROM detalleventa
-        INNER JOIN ventas ON detalleventa.venta_id = ventas.id
-        INNER JOIN productos ON detalleventa.producto_id = productos.id
-        WHERE ventas.id = $id_venta";
+        // $query_detalle = "SELECT detalleventa.*, productos.nombre AS producto, productos.precio AS precio, detalleventa.cantidad * productos.precio AS subtotal
+        // FROM detalleventa
+        // INNER JOIN ventas ON detalleventa.venta_id = ventas.id
+        // INNER JOIN productos ON detalleventa.producto_id = productos.id
+        // WHERE ventas.id = $id_venta";
 
-        $info_venta = DB::select($query_infoventa);
-        $detalle_venta = DB::select($query_detalle);
+        // $info_venta = DB::select($query_infoventa);
+        // $detalle_venta = DB::select($query_detalle);
         
-        $data = compact('info_venta', 'detalle_venta');
+        // $data = compact('info_venta', 'detalle_venta');
 
         /* $pdf = PDF::loadView('pdf.ticket', $data);
         return $pdf->stream(); */
 
-        return view('pdf.ticket', compact('info_venta', 'detalle_venta'));
+        return view('pdf.ticket', $this->datosTicket($venta->id));
 
+    }
+
+    public function reimprimir($id)
+    {
+        $data = $this->datosTicket($id);
+
+        if (empty($data['info_venta'])) {
+            abort(404);
+        }
+
+        $data['reimpresion'] = true;
+
+        return view('pdf.ticket', $data);
+    }
+
+    private function datosTicket($id_venta)
+    {
+        $info_venta = DB::select("SELECT * FROM ventas WHERE id = ?", [$id_venta]);
+
+        $detalle_venta = DB::select("
+        SELECT detalleventa.*, productos.nombre AS producto, productos.precio AS precio,
+               detalleventa.cantidad * productos.precio AS subtotal
+        FROM detalleventa
+        INNER JOIN productos ON detalleventa.producto_id = productos.id
+        WHERE detalleventa.venta_id = ?", [$id_venta]);
+
+        return compact('info_venta', 'detalle_venta');
     }
 
     public function genera_ticket(Request $request){

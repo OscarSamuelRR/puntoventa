@@ -117,7 +117,7 @@
         
         <p class="centrado">¡GRACIAS POR SU COMPRA!
             <img style="width: 70% !important;" src="{{ asset('images/paginaspa.png') }}" alt="Logotipo">
-            <br>El presente documento no es un comprobante fiscal. Si requiere factura favor de mandar su folio de venta al correo: callcenter@lasmananitas.com.mx junto con su constancia de identificación fiscal, forma de pago y el uso del CFDI. Tambien se requiere mandar foto de ticket de compra para que sea legible
+            <br>El presente documento no es un comprobante fiscal. Si requiere factura favor de mandar su folio de venta al correo: callcenter@lasmananitas.com.mx junto con su constancia de identificación fiscal, forma de pago y el uso del CFDI. Tambien se requiere mandar foto de ticket de compra que sea legible
             <br><br><b>https://lasmananitas.com.mx</b>
         </p>
         <br>
